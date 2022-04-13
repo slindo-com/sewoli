@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Sewoli - Service Worker Library</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <h1>
+        Sewoli - Service Worker Library
+    </h1>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js', {
+                scope: './'
+            }).then(registration => {
+                registration.update()
+                location.reload()
+            })
+        }
+    </script>
+</body>
+</html>

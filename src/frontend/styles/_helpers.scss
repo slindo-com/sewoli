@@ -1,0 +1,32 @@
+html, body {
+	font-family: overpass, sans-serif;
+	font-size:13px;
+	color:var(--c-grey-30);
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family:overpass, sans-serif;
+	background:var(--c-grey-94);
+	color:var(--c-grey-30);
+}
+
+* {
+	box-sizing: border-box;
+	margin:0;
+	padding:0;
+	-webkit-font-smoothing:antialiased;
+	outline:none;
+}
+
+
+h1, h2, h3, h4, h5, h6, ul, li, figure {
+    margin:0;
+    padding:0;
+}
+
+ul {
+	list-style: none;
+}

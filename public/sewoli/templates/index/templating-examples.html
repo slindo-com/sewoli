@@ -1,0 +1,48 @@
+<script type="application/json">
+    {
+        "attributes": ["pageTitle", "text", "number", "items"],
+        "components": {
+            "UiHeader": "ui/ui_header",
+            "UiMainNav": "ui/ui_main_nav",
+            "UiFooter": "ui/ui_footer"
+        }
+    }
+</script>
+
+<UiHeader pageTitle="Templating Examples" />
+<UiMainNav />
+
+<section>
+    <h1>
+        {{pageTitle}}
+    </h1>
+    <p>
+        {{text}}
+    </p>
+    
+        {#if number < 5}
+            <p>
+                The number is smaller than 5!
+            </p>
+        {:else if number > 5}
+            <p>
+                The number is bigger than 5!
+            </p>
+        {:else}
+            <p>
+                This number is 5!
+            </p>
+        {/if}
+    
+        <ul>
+            {#each items as item}
+                <li>
+                    <strong>
+                        #{{item.number}}
+                    </strong>{{item.title}}
+                </li>
+            {/each}
+        </ul>
+</section>
+
+<UiFooter />

@@ -1,0 +1,26 @@
+nav {
+    background:var(--c-grey-30);
+    padding:0;
+
+    ul {
+        display:flex;
+        justify-content: center;
+    }
+
+    a {
+        color:var(--c-white);
+        display:block;
+        padding:12px;
+        text-decoration: none;
+
+        &:hover {
+            background:var(--c-blue);
+        }
+    }
+}
+
+section {
+    padding:20px;
+    margin:auto;
+    max-width:500px;
+}

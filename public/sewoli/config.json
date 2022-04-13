@@ -1,0 +1,9 @@
+{
+    "ENVIROMENT": "DEV",
+    "WEBSERVER": {
+        "CONTROLLERS": [
+            "index/index",
+            "index/templating-examples"
+        ]
+    }
+}

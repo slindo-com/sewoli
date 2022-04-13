@@ -1,0 +1,1 @@
+console.log("Sewoli runs without any frontend javascript.");

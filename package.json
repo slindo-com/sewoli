@@ -1,0 +1,29 @@
+{
+    "name": "sewoli",
+    "version": "0.0.1",
+    "description": "Sewoli - A Service Worker Library",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/slindo-com/sewoli.git"
+    },
+    "keywords": [
+        "sewoli"
+    ],
+    "author": "Benjamin Kowalski",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/slindo-com/sewoli/issues"
+    },
+    "homepage": "https://github.com/slindo-com/sewoli#readme",
+    "devDependencies": {
+        "mkpath": "^1.0.0",
+        "node-sass": "^4.14.1",
+        "node-watch": "^0.5.8",
+        "terser": "^4.8.0",
+        "browser-sync": "^2.27.5"
+    }
+}
