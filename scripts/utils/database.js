@@ -1,66 +1,69 @@
-/* const _storesConnection = indexedDB.open('db', SEWOLI_CONFIG.DATABASE.ITERATION)
+let _storesConnection
 
 let _storesObjectStores = {} // stores onjectStores of the indexedDB
 let _storesStores = {} // stores the stores received from the sewoli class
 
 let _storesDatabase // the indexedDB instance
 
-let _storesModels = SEWOLI_CONFIG.DATABASE.MODELS
+let _storesModels
 
 const _storesQueueModel = {
     type: '_queue',
     attributes: {
         action: '',
         content: '',
-        created_at: ''
+        created_at: '' // TODO: Add always?
     }
 }
-
-_storesModels.push(_storesQueueModel)
 
 
 const _storesCreateIndex = (objStore, title, index) => 
     objStore.createIndex(title, index, { unique: false })
 
+const _databaseInit = () => {
+	_storesModels = SEWOLI_CONFIG.DATABASE.MODELS
+	_storesModels.push(_storesQueueModel)
 
-_storesConnection.onupgradeneeded = () => {
-    _storesDatabase = _storesConnection.result
+	_storesConnection = indexedDB.open('db', SEWOLI_CONFIG.DATABASE.ITERATION)
 
-    _storesModels.forEach(model => {
-        _storesObjectStores[model.type] = _storesDatabase.createObjectStore(model.type, { keyPath: 'id' })
-        _storesCreateIndex(_storesObjectStores[model.type], 'isDeleted', 'isDeleted')
-        _storesCreateIndex(_storesObjectStores[model.type], 'toSync', 'toSync')
-
-        if (model.indexes) {
-            model.indexes.forEach(indexData => _storesCreateIndex(_storesObjectStores[model.type], indexData.title, indexData.index))
-        }
-
-        // TODO: we don't need this (why?)
-        _storesStores[model.type] = new _storesStoreClass({
-            store: model.type,
-            model: model.attributes
-        })
-    })
-
-    _storesDatabase.createObjectStore('keyvalue')
+	_storesConnection.onupgradeneeded = () => {
+		_storesDatabase = _storesConnection.result
+	
+		_storesModels.forEach(model => {
+			_storesObjectStores[model.type] = _storesDatabase.createObjectStore(model.type, { keyPath: 'id' })
+			_storesCreateIndex(_storesObjectStores[model.type], 'isDeleted', 'isDeleted')
+			_storesCreateIndex(_storesObjectStores[model.type], 'toSync', 'toSync')
+	
+			if (model.indexes) {
+				model.indexes.forEach(indexData => _storesCreateIndex(_storesObjectStores[model.type], indexData.title, indexData.index))
+			}
+	
+			// TODO: we don't need this (why?)
+			_storesStores[model.type] = new _storesStoreClass({
+				store: model.type,
+				model: model.attributes
+			})
+		})
+	
+		_storesDatabase.createObjectStore('keyvalue')
+	}
+	
+	
+	_storesConnection.onsuccess = e => {
+		_storesDatabase = e.target.result
+	
+		_storesModels.forEach(model => {
+			_storesStores[model.type] = new _storesStoreClass({
+				store: model.type,
+				model: model.attributes
+			})
+		})
+	}
+	
+	_storesConnection.onerror = e => {
+		console.log('DATABASE ERROR', e)
+	}
 }
-
-
-_storesConnection.onsuccess = e => {
-    _storesDatabase = e.target.result
-
-    _storesModels.forEach(model => {
-        _storesStores[model.type] = new _storesStoreClass({
-            store: model.type,
-            model: model.attributes
-        })
-    })
-}
-
-_storesConnection.onerror = e => {
-    console.log('DATABASE ERROR', e)
-}
-
 
 const getStore = id => _storesStores[id]
 
@@ -256,4 +259,4 @@ class _storesStoreClass {
 	async delete (id) {
 		return this._delete(this.store, id)
 	}
-}*/
+}

@@ -1,7 +1,7 @@
-/* let _hasAuth = false
+let _hasAuth = false
 
 
-const _auth = async () => {
+const _authInit = async () => {
     const jwt = await keyValueGet('jwt')
 
     if(jwt) {
@@ -54,7 +54,7 @@ const signOut = async () =>
             action: 'sign-out',
             jwt
         }).then(async res => {
-            console.log('TEST')
+            // TODO: clear database
             await keyValueSet('jwt', '')
             resolve(res)
         }).catch(reject)
@@ -66,4 +66,4 @@ const sendPasswordMail = ({ email }) => {
 }
 
 
-const hasAuth = () => _hasAuth*/
+const hasAuth = () => _hasAuth

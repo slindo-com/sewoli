@@ -1,17 +1,16 @@
-/* let _gatewayConnected = false,
+let _gatewayConnected = false,
     _gatewayPromises = {},
     _gatewayWebsocket = null
 
 
-const _gatewayInit = () => {
-    _gatewayWebsocket = new WebSocket(SEWOLI_CONFIG.SERVER)
+const _gatewayInit = () => { 
+
+    _gatewayWebsocket = new WebSocket(SEWOLI_CONFIG.GATEWAY.SERVER)
 
     _gatewayWebsocket.onopen = () => {
         _gatewayConnected = true
-
         console.log('CONNECTED')
-
-        _auth()
+        _authInit()
     }
 
     _gatewayWebsocket.onclose = () => {
@@ -20,17 +19,14 @@ const _gatewayInit = () => {
     }
 
     _gatewayWebsocket.onmessage = message => {
-
         const json = JSON.parse(message.data)
-
         console.log('JSON', json)
-
         if(json && _gatewayPromises[json.promiseId]) {
             _gatewayPromises[json.promiseId][json.err ? 'reject' : 'resolve'](json.err ? json.err :json.res)
         } else {
 
             // TODO: Nachdem auth umgesetzt wurde
-            / * switch(json.action) {
+            /* switch(json.action) {
                 case 'updateAuth':
                     swsServer.auth.updateAuth(json.user, json.jwt, true, true)
                     break;
@@ -40,7 +36,7 @@ const _gatewayInit = () => {
                 case 'updateTeams':
                     swsServer.auth.updateTeams(json.team, true)
                     break;
-            } * /
+            } */
         }
     } 
 
@@ -50,13 +46,8 @@ const _gatewayInit = () => {
 }
 
 
-if(typeof SEWOLI_CONFIG.SERVER != 'undefined') {
-    _gatewayInit()
-}
-
-
 const gatewaySend = json => {
-    json.promiseId = Math.floor(Math.random() * 1000000000000)
+    json.promiseId = Math.floor(Math.random() * 1000000000)
 
     return new Promise((resolve, reject) => {
         _gatewayPromises[json.promiseId] = {
@@ -72,4 +63,4 @@ const gatewaySend = json => {
             })
         }
     })
-}*/
+}

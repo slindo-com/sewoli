@@ -1,4 +1,4 @@
-const _webserverRoutesArr = [] // holds routes with metadata & controller function
+let _webserverRoutesArr = [] // holds routes with metadata & controller function
 const _webserverTemplates = {} // holds the templates of sewoli instance
 let SEWOLI_CONFIG // the config will be filled in here
 let _serverActive = false
@@ -7,17 +7,27 @@ const _activateWebserver = async () => {
 
     SEWOLI_CONFIG = await (await _webserverGetCache('/sewoli/config.json')).json()
 
+    _webserverRoutesArr = []
+
     await Promise.all(SEWOLI_CONFIG.WEBSERVER.CONTROLLERS.map(async controllerTitle => {
         const controllerJavascript = await (await _webserverGetCache(`/sewoli/controllers/${controllerTitle}.js`)).text()
         eval(controllerJavascript)
         return
     }))
 
+    if(typeof SEWOLI_CONFIG.GATEWAY.SERVER != 'undefined') {
+        _databaseInit()
+        _gatewayInit()
+    }
+
     _serverActive = true
 }
 
 // executed for every fetch
 const _fetchListener = async e => {
+
+    // TODO: JUST IF DEV
+    _activateWebserver()
 
     // get pathname from request data
     const { pathname } = new URL(e.request.url, self.location)

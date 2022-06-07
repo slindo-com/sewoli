@@ -1,0 +1,32 @@
+<script type="application/json">
+    {
+        "attributes": ["pageTitle", "hasAuth", "projects"],
+        "components": {
+            "UiHeader": "ui/ui_header",
+            "UiMainNav": "ui/ui_main_nav",
+            "UiFooter": "ui/ui_footer"
+        }
+    }
+</script>
+
+<UiHeader pageTitle="Sewoli" />
+<UiMainNav />
+
+<section>
+    <form method="POST">
+        <input type="text" name="todo" />
+        <button type="submit">
+            Add Todo
+        </button>
+    </form>
+
+    <ul>
+        {#each projects as project}
+            <li>
+                {{project.title}}
+            </li>
+        {/each}
+    </ul>
+</section>
+
+<UiFooter />

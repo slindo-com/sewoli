@@ -3,7 +3,49 @@
     "WEBSERVER": {
         "CONTROLLERS": [
             "index/index",
-            "index/templating-examples"
+            "index/templating-examples",
+            "auth/sign-up",
+            "auth/sign-in",
+            "todo/todo"
+        ]
+    },
+    "GATEWAY": {
+        "SERVER": "ws://localhost:8080"
+    },
+    "DATABASE": {
+        "ITERATION": 1,
+        "MODELS": [
+        
+            {
+                "type": "project",
+                "attributes": {
+                    "id": "",
+                    "team_id": "",
+                    "user_id": "",
+                    "title": "",
+                    "color": "#333",
+                    "archived": false
+                }
+            },
+        
+            {
+                "type": "time",
+                "attributes": {
+                    "id": "",
+                    "team_id": "",
+                    "user_id": "",
+                    "duration": 0,
+                    "day": 19700101,
+                    "project_id": "",
+                    "task_id": "",
+                    "comment": "",
+                    "billable": true
+                },
+                "indexes": [{
+                    "title": "day",
+                    "index": "day"
+                }]
+            }
         ]
     }
 }

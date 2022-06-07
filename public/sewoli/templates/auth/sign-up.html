@@ -1,0 +1,35 @@
+<script type="application/json">
+    {
+        "attributes": ["pageTitle"],
+        "components": {
+            "UiHeader": "ui/ui_header",
+            "UiMainNav": "ui/ui_main_nav",
+            "UiFooter": "ui/ui_footer"
+        }
+    }
+</script>
+
+<UiHeader pageTitle="Sewoli" />
+<UiMainNav />
+
+<section>
+    <form method="POST">
+        <label for="email">
+            E-Mail
+        </label>
+        <input type="email" name="email" id="email" />
+        <label for="password">
+            Password
+        </label>
+        <input type="password" name="password" id="password" />
+
+        <button type="submit">
+            Sign Up
+        </button>
+    </form>
+</section>
+<a href="/sign-in/">
+    Sign In
+</a>
+
+<UiFooter />
